@@ -431,11 +431,13 @@ joinType
     | RIGHT OUTER?
     | FULL OUTER?
     | LEFT? ANTI
+    | KNN
     ;
 
 joinCriteria
     : ON booleanExpression
-    | USING '(' identifier (',' identifier)* ')'
+    | USING ('(' identifier (',' identifier)* ')' | POINT booleanExpression )
+
     ;
 
 sample
@@ -517,6 +519,7 @@ booleanExpression
     : NOT booleanExpression                                        #logicalNot
     | EXISTS '(' query ')'                                         #exists
     | predicated                                                   #booleanDefault
+    | spatialpredicated                                            #booleanDefaultSpatial
     | left=booleanExpression operator=AND right=booleanExpression  #logicalBinary
     | left=booleanExpression operator=OR right=booleanExpression   #logicalBinary
     ;
@@ -528,12 +531,24 @@ predicated
     : valueExpression predicate?
     ;
 
+spatialpredicated
+    : myexpressionlist1 kind=KNNPRED '(' POINT myexpressionlist2 ',' valueExpression ')'
+    ;
+
 predicate
     : NOT? kind=BETWEEN lower=valueExpression AND upper=valueExpression
     | NOT? kind=IN '(' expression (',' expression)* ')'
     | NOT? kind=IN '(' query ')'
     | NOT? kind=(RLIKE | LIKE) pattern=valueExpression
     | IS NOT? kind=NULL
+    ;
+
+myexpressionlist1
+    : '(' expression (',' expression)* ')'
+    ;
+
+myexpressionlist2
+    : '(' expression (',' expression)* ')'
     ;
 
 valueExpression
@@ -673,7 +688,7 @@ qualifiedName
 
 identifier
     : strictIdentifier
-    | ANTI | FULL | INNER | LEFT | SEMI | RIGHT | NATURAL | JOIN | CROSS | ON
+    | ANTI | FULL | INNER | LEFT | SEMI | RIGHT | NATURAL | JOIN | CROSS | ON | KNN
     | UNION | INTERSECT | EXCEPT | SETMINUS
     ;
 
@@ -839,6 +854,9 @@ COMMIT: 'COMMIT';
 ROLLBACK: 'ROLLBACK';
 MACRO: 'MACRO';
 IGNORE: 'IGNORE';
+KNN: 'KNN';
+POINT: 'POINT';
+KNNPRED: 'KNNPRED';
 
 IF: 'IF';
 

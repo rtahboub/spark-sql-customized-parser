@@ -1382,6 +1382,18 @@ public interface SqlBaseListener extends ParseTreeListener {
 	 */
 	void exitExpression(SqlBaseParser.ExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code booleanDefaultSpatial}
+	 * labeled alternative in {@link SqlBaseParser#booleanExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterBooleanDefaultSpatial(SqlBaseParser.BooleanDefaultSpatialContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code booleanDefaultSpatial}
+	 * labeled alternative in {@link SqlBaseParser#booleanExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitBooleanDefaultSpatial(SqlBaseParser.BooleanDefaultSpatialContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code logicalNot}
 	 * labeled alternative in {@link SqlBaseParser#booleanExpression}.
 	 * @param ctx the parse tree
@@ -1440,6 +1452,16 @@ public interface SqlBaseListener extends ParseTreeListener {
 	 */
 	void exitPredicated(SqlBaseParser.PredicatedContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SqlBaseParser#spatialpredicated}.
+	 * @param ctx the parse tree
+	 */
+	void enterSpatialpredicated(SqlBaseParser.SpatialpredicatedContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SqlBaseParser#spatialpredicated}.
+	 * @param ctx the parse tree
+	 */
+	void exitSpatialpredicated(SqlBaseParser.SpatialpredicatedContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SqlBaseParser#predicate}.
 	 * @param ctx the parse tree
 	 */
@@ -1449,6 +1471,26 @@ public interface SqlBaseListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPredicate(SqlBaseParser.PredicateContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SqlBaseParser#myexpressionlist1}.
+	 * @param ctx the parse tree
+	 */
+	void enterMyexpressionlist1(SqlBaseParser.Myexpressionlist1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link SqlBaseParser#myexpressionlist1}.
+	 * @param ctx the parse tree
+	 */
+	void exitMyexpressionlist1(SqlBaseParser.Myexpressionlist1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link SqlBaseParser#myexpressionlist2}.
+	 * @param ctx the parse tree
+	 */
+	void enterMyexpressionlist2(SqlBaseParser.Myexpressionlist2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link SqlBaseParser#myexpressionlist2}.
+	 * @param ctx the parse tree
+	 */
+	void exitMyexpressionlist2(SqlBaseParser.Myexpressionlist2Context ctx);
 	/**
 	 * Enter a parse tree produced by the {@code valueExpressionDefault}
 	 * labeled alternative in {@link SqlBaseParser#valueExpression}.

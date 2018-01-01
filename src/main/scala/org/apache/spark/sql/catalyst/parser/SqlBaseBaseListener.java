@@ -1504,6 +1504,18 @@ public class SqlBaseBaseListener implements SqlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterBooleanDefaultSpatial(SqlBaseParser.BooleanDefaultSpatialContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBooleanDefaultSpatial(SqlBaseParser.BooleanDefaultSpatialContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLogicalNot(SqlBaseParser.LogicalNotContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1564,6 +1576,18 @@ public class SqlBaseBaseListener implements SqlBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSpatialpredicated(SqlBaseParser.SpatialpredicatedContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSpatialpredicated(SqlBaseParser.SpatialpredicatedContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPredicate(SqlBaseParser.PredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1571,6 +1595,30 @@ public class SqlBaseBaseListener implements SqlBaseListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitPredicate(SqlBaseParser.PredicateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMyexpressionlist1(SqlBaseParser.Myexpressionlist1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMyexpressionlist1(SqlBaseParser.Myexpressionlist1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMyexpressionlist2(SqlBaseParser.Myexpressionlist2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMyexpressionlist2(SqlBaseParser.Myexpressionlist2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
