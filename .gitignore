@@ -1,0 +1,9 @@
+*.jar
+*.class
+.*.sw*
+*.bin
+
+target/
+project/project/
+project/target/
+
