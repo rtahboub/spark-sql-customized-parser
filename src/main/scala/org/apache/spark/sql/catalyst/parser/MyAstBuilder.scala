@@ -589,20 +589,40 @@ class MyAstBuilder(conf: SQLConf) extends SqlBaseBaseVisitor[AnyRef] with Loggin
         }
 
         // Resolve the join type and join condition
-        val (joinType, condition) = Option(join.joinCriteria) match {
-          case Some(c) if c.USING != null =>
-            (UsingJoin(baseJoinType, c.identifier.asScala.map(_.getText)), None)
-          case Some(c) if c.booleanExpression != null =>
-            (baseJoinType, Option(expression(c.booleanExpression)))
-          case None if join.NATURAL != null =>
-            if (baseJoinType == Cross) {
-              throw new ParseException("NATURAL CROSS JOIN is not supported", ctx)
-            }
-            (NaturalJoin(baseJoinType), None)
-          case None =>
-            (baseJoinType, None)
-        }
-        Join(left, plan(join.right), joinType, condition)
+//        val (joinType, condition) = Option(join.joinCriteria) match {
+//          case Some(c) if c.USING != null =>
+//            (UsingJoin(baseJoinType, c.identifier.asScala.map(_.getText)), None)
+//          case Some(c) if c.booleanExpression != null =>
+//            (baseJoinType, Option(expression(c.booleanExpression)))
+//          case None if join.NATURAL != null =>
+//            if (baseJoinType == Cross) {
+//              throw new ParseException("NATURAL CROSS JOIN is not supported", ctx)
+//            }
+//            (NaturalJoin(baseJoinType), None)
+//          case None =>
+//            (baseJoinType, None)
+//        }
+//        Join(left, plan(join.right), joinType, condition)
+//      }
+//    }
+//  }
+
+                Option(join.joinCriteria) match {
+                  case Some(c) if c.USING != null && c.POINT != null =>
+                    SpatialJoin(left, plan(join.right), KNNJoin, Option(expression(c.booleanExpression)))
+                  case Some(c) if c.USING != null =>
+                    Join(left, plan(join.right), UsingJoin(baseJoinType, c.identifier.asScala.map(_.getText)), None)
+                  case Some(c) if c.booleanExpression != null =>
+                    Join(left, plan(join.right), baseJoinType, Option(expression(c.booleanExpression)))
+                  case None if join.NATURAL != null =>
+                    if (baseJoinType == Cross) {
+                      throw new ParseException("NATURAL CROSS JOIN is not supported", ctx)
+                    }
+                    Join(left, plan(join.right), NaturalJoin(baseJoinType), None)
+                  case None =>
+                    Join(left, plan(join.right), baseJoinType, None)
+                }
+
       }
     }
   }
@@ -968,6 +988,15 @@ class MyAstBuilder(conf: SQLConf) extends SqlBaseBaseVisitor[AnyRef] with Loggin
         IsNotNull(e)
       case SqlBaseParser.NULL =>
         IsNull(e)
+    }
+  }
+
+  override def visitSpatialpredicated(ctx: SpatialpredicatedContext): Expression = withOrigin(ctx){
+    val e = expression(ctx.valueExpression)
+    ctx.kind.getType match {
+      case SqlBaseParser.KNNPRED =>
+        PredKnn(ctx.myexpressionlist1.expression.asScala.map(expression),
+          ctx.myexpressionlist2.expression.asScala.map(expression),e)
     }
   }
 
