@@ -20,10 +20,12 @@ scalacOptions += "-DshowSuppressedErrors=true"
 parallelExecution in Test := false
 
 libraryDependencies += "org.apache.spark" %% "spark-core" % "2.2.1"
-libraryDependencies += "org.apache.spark" %% "spark-repl" % "2.2.1"
-libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.2.1"
-libraryDependencies += "org.apache.spark" %% "spark-catalyst" % "2.2.1"
 
+libraryDependencies += "org.apache.spark" %% "spark-repl" % "2.2.1"
+
+libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.2.1"
+
+libraryDependencies += "org.apache.spark" %% "spark-catalyst" % "2.2.1"
 
 libraryDependencies += "jline" % "jline" % "2.11"
 

@@ -10,7 +10,7 @@ object SparkFrontend extends Tables{
   def main(args: Array[String]): Unit ={
 
     lazy val spark = {
-      val conf = new SparkConf().setAppName("Flare").setMaster("local[1]")
+      val conf = new SparkConf().setAppName("example").setMaster("local[1]")
       type ExtensionsBuilder = SparkSessionExtensions => Unit
       def create(builder: ExtensionsBuilder): ExtensionsBuilder = builder
       val extension = create { extensions =>
